@@ -1,0 +1,23 @@
+{
+    "1" : {
+        "firstName" : "Blake",
+        "lastName" : "Morse",
+        "email" : "blakemorse@gmail.com",
+        "favoriteColor" : "Pink",
+        "birthday" : "April 12, 2000"
+    },
+    "2" : {
+        "firstName" : "Tyler",
+        "lastName" : "Young",
+        "email" : "tyleryoung@gmail.com",
+        "favoriteColor" : "Blue",
+        "birthday" : "February 2, 2001"
+    },
+    "3" : {
+        "firstName" : "Bryce",
+        "lastName" : "Smith",
+        "email" : "brycesmith@gmail.com",
+        "favoriteColor" : "Blue",
+        "birthday" : "November 30, 1999"
+    }
+}

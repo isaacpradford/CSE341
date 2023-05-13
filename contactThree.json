@@ -1,0 +1,9 @@
+{
+    "3" : {
+    "firstName" : "Bryce",
+    "lastName" : "Smith",
+    "email" : "brycesmith@gmail.com",
+    "favoriteColor" : "Blue",
+    "birthday" : "November 30, 1999"
+    }
+}

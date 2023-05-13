@@ -1,14 +1,26 @@
-require('dotenv').config()
-
 var express = require('express')
-var app = express()
+const bodyParser = require('body-parser')
+const mongodb = require('./db/connect')
+var app = express();
 
-const port = 8801;
+// const dotenv = require('dotenv').config();
 
-app.get('/', function(req, res) {
-    (res.send("Isaac Radford!"))
+const port = process.env.PORT || 8801;
+
+app
+    .use(bodyParser.json())
+    .use((req, res, next) => {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        next();
+      })
+      .use('/', require('./routes'));
+
+
+mongodb.initializeDb((err, mongodb) => {
+    if (err) {
+        console.log(err);
+    } else {    
+        app.listen(port);
+        console.log(`listening on port: ${port}`)
+    }
 });
-
-var server = app.listen(port, function() {
-    (console.log(`listening on port: ${port}`))
-})
