@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/', (res, req) => {
-    req.send("Welcome!")
-})
+router.use('/contacts', require('./contacts'));
 
-router.get('/contacts', require('./contacts'));
+// router.get('/', (res, req) => {
+//     req.send("Welcome!")
+// })
 
 module.exports = router;

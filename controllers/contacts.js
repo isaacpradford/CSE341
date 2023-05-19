@@ -19,13 +19,16 @@ const getSingleContact = async(req, res, next) => {
     .getDb()
     .db('cse341')
     .collection('contacts')
-    .findOne({_id: new ObjectId(req.params.id) })
+    .findOne({_id: new ObjectId(req.params.id) });
 
+
+    res.send(result).status(200);
     if (!result) {
-        return res.sendStatus(404);
+        // return res.sendStatus(404);
+        console.log("no result")
     }
 
-    res.send(result).status(200)
+    
 };
     
 
