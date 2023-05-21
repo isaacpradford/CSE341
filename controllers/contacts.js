@@ -76,13 +76,12 @@ const createContact = async (req, res) => {
   };
 
   const deleteContact = async (req, res) => {
-    const userId = new ObjectId(req.params.id);
-
+    
     const response = await mongodb
     .getDb()
     .db('cse341')
     .collection('contacts')
-    .remove({ _id: userId }, true);
+    .remove({ _id: new ObjectId(req.params.id)  }, true);
 
     console.log(response);
     if (response.deletedCount > 0) {
