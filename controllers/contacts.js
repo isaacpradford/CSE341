@@ -24,12 +24,73 @@ const getSingleContact = async(req, res, next) => {
 
     res.send(result).status(200);
     if (!result) {
-        // return res.sendStatus(404);
         console.log("no result")
     }
 
     
 };
+
+const createContact = async (req, res) => {
+
+    const contact = {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      favoriteColor: req.body.favoriteColor,
+      birthday: req.body.birthday
+    };
+
+    const response = await mongodb
+    .getDb()
+    .db('cse341')
+    .collection('contacts')
+    .insertOne(contact);
+    if (response.acknowledged) {
+      res.status(201).json(response);
+    } else {
+      res.status(500).json(response.error || 'Some error occurred while creating the contact.');
+    }
+  };
+
+  const updateContact = async (req, res) => {
+    // be aware of updateOne if you only want to update specific fields
+    const contact = {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      favoriteColor: req.body.favoriteColor,
+      birthday: req.body.birthday
+    };
+    const response = await mongodb
+      .getDb()
+      .db('cse341')
+      .collection('contacts')
+      .replaceOne({ _id: new ObjectId(req.params.id)  }, contact);
+
+    console.log(response);
+    if (response.modifiedCount > 0) {
+      res.status(204).send();
+    } else {
+      res.status(500).json(response.error || 'Some error occurred while updating the contact.');
+    }
+  };
+
+  const deleteContact = async (req, res) => {
+    const userId = new ObjectId(req.params.id);
+
+    const response = await mongodb
+    .getDb()
+    .db('cse341')
+    .collection('contacts')
+    .remove({ _id: userId }, true);
+
+    console.log(response);
+    if (response.deletedCount > 0) {
+      res.status(204).send();
+    } else {
+      res.status(500).json(response.error || 'Some error occurred while deleting the contact.');
+    }
+  };
     
 
-module.exports = { getAllContactData, getSingleContact, }
+module.exports = { getAllContactData, getSingleContact, createContact, updateContact, deleteContact}
